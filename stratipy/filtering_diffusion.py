@@ -28,24 +28,6 @@ from memory_profiler import profile
 
 
 @profile
-def sym_matrix_to_index(X):
-    # return 1D array of upper-triangle matrix
-    indices = np.triu_indices(X.shape[0], 1)  # don't take diaglnal elements
-    X = X[indices].astype(np.float32)
-    return X
-
-
-@profile
-def index_to_sym_matrix(n, I):
-    # I = 1D array of upper-triangle matrix
-    a = np.zeros((n, n), dtype=np.float32)
-    a[np.triu_indices(n, 1)] = I
-    # symmetrization
-    a = a + a.T
-    return a
-
-
-@profile
 def propagation(M, adj, alpha=0.7, tol=10e-6):  # TODO equation, M, alpha
     """Network propagation iterative process
 
